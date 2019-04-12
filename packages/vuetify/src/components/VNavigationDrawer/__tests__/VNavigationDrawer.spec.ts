@@ -67,10 +67,10 @@ describe('VNavigationDrawer', () => {
     } })
 
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+    expect(wrapper.vm.$vuetify.application.left).toBe(256)
 
     await resizeWindow(1200)
-    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+    expect(wrapper.vm.$vuetify.application.left).toBe(256)
     expect(wrapper.vm.overlay).toBeFalsy()
   })
 
@@ -84,10 +84,10 @@ describe('VNavigationDrawer', () => {
     })
 
     await wrapper.vm.$nextTick()
-    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+    expect(wrapper.vm.$vuetify.application.left).toBe(256)
 
     await resizeWindow(1200)
-    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+    expect(wrapper.vm.$vuetify.application.left).toBe(256)
     expect(wrapper.vm.overlay).toBeFalsy()
   })
 
@@ -146,13 +146,13 @@ describe('VNavigationDrawer', () => {
     } })
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+    expect(wrapper.vm.$vuetify.application.left).toBe(256)
 
     wrapper.setProps({ temporary: true })
     expect(wrapper.vm.$vuetify.application.left).toBe(0)
 
     wrapper.setProps({ temporary: false })
-    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+    expect(wrapper.vm.$vuetify.application.left).toBe(256)
   })
 
   it('should update content padding when permanent state is changed', async () => {
@@ -166,7 +166,7 @@ describe('VNavigationDrawer', () => {
     expect(wrapper.vm.$vuetify.application.left).toBe(0)
 
     wrapper.setProps({ permanent: true })
-    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+    expect(wrapper.vm.$vuetify.application.left).toBe(256)
 
     wrapper.setProps({ permanent: false })
     expect(wrapper.vm.$vuetify.application.left).toBe(0)
@@ -178,13 +178,13 @@ describe('VNavigationDrawer', () => {
     } })
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+    expect(wrapper.vm.$vuetify.application.left).toBe(256)
 
     wrapper.setProps({ miniVariant: true })
-    expect(wrapper.vm.$vuetify.application.left).toBe(80)
+    expect(wrapper.vm.$vuetify.application.left).toBe(56)
 
     wrapper.setProps({ miniVariant: false })
-    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+    expect(wrapper.vm.$vuetify.application.left).toBe(256)
   })
 
   it('should not remain mobile when temporary is toggled', async () => {
@@ -222,7 +222,7 @@ describe('VNavigationDrawer', () => {
     await wrapper.vm.$nextTick()
 
     wrapper.vm.$on('input', input)
-    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+    expect(wrapper.vm.$vuetify.application.left).toBe(256)
     await resizeWindow(800)
     wrapper.vm.$vuetify.breakpoint.width = 800
     expect(wrapper.vm.$vuetify.application.left).toBe(0)
@@ -238,7 +238,7 @@ describe('VNavigationDrawer', () => {
     wrapper.vm.$vuetify.breakpoint.width = 1920
     expect(wrapper.vm.isActive).toBe(true)
     expect(wrapper.vm.isMobile).toBe(false)
-    expect(wrapper.vm.$vuetify.application.left).toBe(300)
+    expect(wrapper.vm.$vuetify.application.left).toBe(256)
   })
 
   it('should not have marginTop when temporary / isMobile', async () => {
@@ -249,38 +249,38 @@ describe('VNavigationDrawer', () => {
     })
     wrapper.vm.$vuetify.application.bar = 0
 
-    expect(wrapper.vm.marginTop).toBe(0)
+    expect(wrapper.vm.computedTop).toBe(0)
 
     wrapper.vm.$vuetify.application.bar = 24
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.marginTop).toBe(24)
+    expect(wrapper.vm.computedTop).toBe(24)
 
     await resizeWindow(640)
     wrapper.vm.$vuetify.breakpoint.width = 640
 
-    expect(wrapper.vm.marginTop).toBe(0)
+    expect(wrapper.vm.computedTop).toBe(0)
 
     await resizeWindow(1980)
     wrapper.vm.$vuetify.breakpoint.width = 1980
 
-    expect(wrapper.vm.marginTop).toBe(24)
+    expect(wrapper.vm.computedTop).toBe(24)
 
     wrapper.setProps({ temporary: true })
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.marginTop).toBe(0)
+    expect(wrapper.vm.computedTop).toBe(0)
 
     wrapper.setProps({ app: false, temporary: false })
 
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.vm.marginTop).toBe(0)
+    expect(wrapper.vm.computedTop).toBe(0)
 
     wrapper.setProps({ app: true })
 
-    expect(wrapper.vm.marginTop).toBe(24)
+    expect(wrapper.vm.computedTop).toBe(24)
   })
 })
